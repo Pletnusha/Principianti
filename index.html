@@ -39,17 +39,14 @@
             font-size: 2.4rem;
             font-weight: 700;
             text-transform: uppercase;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
         }
 
-    
+        
         .logo-wrap {
-            width: 160px;          
-            height: 160px;
-            border-radius: 50%;
-            overflow: hidden;
+            width: 150px;
+            height: 150px;
             margin: 0 auto 2rem;
-            background-color: #ffffff;
         }
 
         .logo-wrap img {
@@ -57,6 +54,8 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            clip-path: circle(50% at 50% 50%);
+            -webkit-clip-path: circle(50% at 50% 50%);
         }
 
         main {
@@ -64,12 +63,18 @@
             max-width: 700px;
         }
 
-        .intro-line-1 {
+        
+        .intro-block {
             font-size: 1.4rem;
             font-weight: 600;
             color: #6B1D36;
             text-transform: uppercase;
+            line-height: 1.4;
             margin-bottom: 1rem;
+        }
+
+        .intro-block span {
+            display: block; /* ⬅️ каждое слово с новой строки */
         }
 
         .intro-line-2,
@@ -100,11 +105,11 @@
             }
 
             .logo-wrap {
-                width: 180px;
-                height: 180px;
+                width: 170px;
+                height: 170px;
             }
 
-            .intro-line-1 {
+            .intro-block {
                 font-size: 1.6rem;
             }
         }
@@ -122,7 +127,12 @@
     </header>
 
     <main>
-        <div class="intro-line-1">BENVENUTI NELLA LINGUA RUSSA</div>
+        <div class="intro-block">
+            <span>BENVENUTI</span>
+            <span>NELLA</span>
+            <span>LINGUA RUSSA</span>
+        </div>
+
         <div class="intro-line-2">Qui puoi esercitarti nella grammatica,</div>
         <div class="intro-line-3">che cosa aspetti?</div>
 
