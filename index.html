@@ -1,110 +1,138 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LIVE LANGUAGE_RUSSIAN</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIVE LANGUAGE_RUSSIAN</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-body {
-    font-family: 'Montserrat', sans-serif;
-    background: #fff;
-    color: #000;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-.page {
-    text-align: center;
-    padding: 2rem 1rem;
-}
+        .page {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            max-width: 420px;
+            width: 100%;
+        }
 
+        h1 {
+            font-family: "League Spartan", sans-serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 1.8rem;
+        }
 
-h1 {
-    font-family: "League Spartan", sans-serif;
-    font-size: 2.6rem;
-    text-transform: uppercase;
-    margin-bottom: 2rem;
-}
+        
+        .logo-wrapper {
+            width: 220px;
+            height: 220px;
+            margin: 0 auto 2rem;
+            border-radius: 50%;
+            overflow: hidden;
+            background: #ffffff;
+        }
 
+        .logo-wrapper img {
+            width: 138%;
+            height: 138%;
+            object-fit: cover;
+            transform: translate(-19%, -19%);
+            display: block;
+        }
 
-.logo-wrapper {
-    width: 200px;        
-    height: 200px;
-    border-radius: 50%;
-    overflow: hidden;     
-    margin: 0 auto 2.5rem;
-}
+       
+        .intro-title {
+            font-weight: 600;
+            font-size: 1.9rem;
+            color: #6B1D36;
+            line-height: 1.25;
+            margin-bottom: 1.4rem;
+        }
 
+        .intro-title span {
+            display: block;
+        }
 
-.logo-wrapper img {
-    width: 120%;           
-    height: 120%;
-    object-fit: cover;
-    transform: translate(-10%, -10%); 
-}
+        .subtitle {
+            font-size: 1.15rem;
+            line-height: 1.5;
+            margin-bottom: 2.2rem;
+        }
 
+     
+        .cta {
+            display: inline-block;
+            padding: 1rem 2.6rem;
+            background-color: #FF6B00;
+            color: #000000;
+            border-radius: 999px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
 
-.intro-title {
-    font-size: 2rem;       
-    font-weight: 600;
-    color: #6B1D36;
-    text-transform: uppercase;
-    line-height: 1.2;
-    margin-bottom: 1.5rem;
-}
+        .cta:hover {
+            background-color: #ff7e1f;
+        }
 
-.intro-text {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-}
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 2.8rem;
+            }
 
-.cta {
-    display: inline-block;
-    padding: 1rem 2.5rem;
-    background: #FF6B00;
-    color: #000;
-    border-radius: 999px;
-    text-decoration: none;
-    font-size: 1.1rem;
-}
-</style>
+            .logo-wrapper {
+                width: 260px;
+                height: 260px;
+            }
+
+            .intro-title {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
-<div class="page">
+    <div class="page">
 
-    <h1>LIVE<br>LANGUAGE_RUSSIAN</h1>
+        <h1>LIVE<br>LANGUAGE_RUSSIAN</h1>
 
-    <div class="logo-wrapper">
-        <img src="assets/logog%20scuola%20finfin.png" alt="logo">
+        <div class="logo-wrapper">
+            <img src="assets/logog%20scuola%20finfin.png" alt="Live Language Russian">
+        </div>
+
+        <div class="intro-title">
+            <span>BENVENUTI</span>
+            <span>NELLA</span>
+            <span>LINGUA RUSSA</span>
+        </div>
+
+        <div class="subtitle">
+            Qui puoi esercitarti nella grammatica,<br>
+            che cosa aspetti?
+        </div>
+
+        <a href="form.html" class="cta">imparare gratis</a>
+
     </div>
-
-    <div class="intro-title">
-        BENVENUTI<br>
-        NELLA<br>
-        LINGUA RUSSA
-    </div>
-
-    <div class="intro-text">
-        Qui puoi esercitarti nella grammatica,<br>
-        che cosa aspetti?
-    </div>
-
-    <a class="cta" href="form.html">imparare gratis</a>
-
-</div>
 </body>
 </html>
