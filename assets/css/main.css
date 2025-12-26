@@ -342,6 +342,53 @@ body {
   .level-header h1 {
     font-size: 3rem;
   }
+  /* ===== MOBILE LAYOUT FIX – HEADINGS + CARD ALIGNMENT ===== */
+
+@media (max-width: 768px) {
+  .level-content {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .level-content .macro-area {
+    margin-bottom: 2.5rem;
+  }
+  
+  .level-content .macro-area-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-align: left;
+    margin-bottom: 0.85rem;
+    margin-top: 0;
+    color: #999;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+  
+  .level-content .macro-area:not(:first-child) {
+    margin-top: 2.75rem;
+  }
+  
+  .level-content .argomento-card {
+    display: block;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: left;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  
+  .level-content .argomento-title {
+    text-align: left;
+  }
+  
+  .level-content .argomento-focus {
+    text-align: left;
+  }
+}
   
   .level-content .argomento-card {
     padding: 2.25rem 3rem;
