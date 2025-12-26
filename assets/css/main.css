@@ -437,3 +437,29 @@ body {
     margin-top: 0.5rem;
   }
 }
+/* ===== MOBILE SECTION HEADINGS – VISUAL HIERARCHY & ALIGNMENT ===== */
+
+@media (max-width: 768px) {
+  .level-content .macro-area {
+    margin-bottom: 2.25rem;
+  }
+  
+  .level-content .macro-area-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    margin-top: 0;
+    color: #888;
+    text-align: left;
+    letter-spacing: 0.01em;
+    padding-left: 0.25rem;
+  }
+  
+  .level-content .macro-area:not(:first-child) {
+    margin-top: 2.5rem;
+  }
+  
+  .level-content .argomento-card:first-of-type {
+    margin-top: 0;
+  }
+}
