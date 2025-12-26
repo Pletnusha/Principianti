@@ -55,3 +55,114 @@ h1, h2, h3 {
   background: #ddd;
   color: #333;
 }
+/* ===== ACCUSATIVO PAGE – CLEAN LAYOUT + GLASS BUTTONS ===== */
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: #f5f6f7;
+  color: #1a1a1a;
+}
+
+/* ===== ACCUSATIVO PAGE – CLEAN LAYOUT + GLASS BUTTONS ===== */
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: #f5f6f7;
+  color: #1a1a1a;
+}
+
+/* Center main content */
+.exercises-section {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+/* Exercise card = button */
+.exercise-card {
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 14px;
+  padding: 1.4rem 1.6rem;
+  margin-bottom: 1.2rem;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+
+  transition:
+    background 0.25s ease,
+    backdrop-filter 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.2s ease;
+}
+
+/* Hover glass effect */
+.exercise-card:hover {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+/* Exercise type label */
+.exercise-type {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #666;
+  margin-bottom: 0.4rem;
+}
+
+/* Exercise title */
+.exercise-title {
+  font-size: 1.05rem;
+  margin: 0.3rem 0 0.9rem;
+}
+
+/* Meta row: status + button */
+.exercise-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Status labels */
+.exercise-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.label-free {
+  color: #2a5bd7;
+}
+
+.label-locked {
+  color: #999;
+}
+
+/* Buttons */
+.exercise-button {
+  font-family: 'Montserrat', sans-serif;
+  padding: 0.45rem 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.button-start {
+  background: #2a5bd7;
+  color: #ffffff;
+}
+
+.button-unlock {
+  background: #e0e0e0;
+  color: #333;
+}
