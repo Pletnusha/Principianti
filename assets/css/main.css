@@ -1,0 +1,57 @@
+/* ===== Base ===== */
+body {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  background: #f5f6f7;
+  color: #1a1a1a;
+}
+
+h1, h2, h3 {
+  font-family: 'League Spartan', sans-serif;
+}
+
+/* ===== Exercise cards ===== */
+.exercise-card {
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 14px;
+  padding: 1.4rem 1.6rem;
+  margin-bottom: 1.2rem;
+
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition:
+    backdrop-filter 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.2s ease,
+    background 0.25s ease;
+}
+
+.exercise-card:hover {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
+}
+
+/* ===== Buttons ===== */
+.exercise-button {
+  font-family: 'Montserrat', sans-serif;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.button-start {
+  background: #2a5bd7;
+  color: #fff;
+}
+
+.button-unlock {
+  background: #ddd;
+  color: #333;
+}
