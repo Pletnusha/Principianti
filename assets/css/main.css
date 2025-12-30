@@ -593,3 +593,6 @@ h1, h2, h3 {
 #ex-flashcards-acc-01 .fca01-card-container {
     margin-bottom: 3.5rem;
 }
+#ex-flashcards-acc-01 .fca01-card-container {
+    max-width: 360px;
+}
