@@ -28,6 +28,222 @@
 
         <section class="exercise-group">
             <h2 class="section-title">Presentare se stesso e la propria famiglia</h2>
+
+            <section id="ex-accusativo-trascina-01">
+    <div id="ex-accusativo-trascina-01-container"></div>
+    <div id="ex-accusativo-trascina-01-completion" style="display:none;"></div>
+</section>
+
+<script>
+(() => {
+    const root = document.getElementById('ex-accusativo-trascina-01');
+    const exerciseContainer = root.querySelector('#ex-accusativo-trascina-01-container');
+    const completionScreen = root.querySelector('#ex-accusativo-trascina-01-completion');
+
+    const exercises = [
+        {
+            instruction: "Completa la frase.",
+            text: " {{1}} зовут Александр, а {{2}} зовут Лиза.",
+            words: ["мой брат", "моего брата", "мою сестра", "мою сестру"],
+            correctAnswers: { 1: "моего брата", 2: "мою сестру" }
+        },
+        {
+            instruction: "Completa la frase.",
+            text: "{{1}} зовут Владислав, {{2}} зовут Елена.",
+            words: ["мою дедушку", "мою бабушку", "моего дедушку"],
+            correctAnswers: { 1: "моего дедушку", 2: "мою бабушку" }
+        },
+        {
+            instruction: "Completa la frase.",
+            text: "{{1}} зовут Светлана, а  {{2}} зовут Анатолий.",
+            words: ["мою тётю", "моего мужа", "её мужа"],
+            correctAnswers: { 1: "мою тётю", 2: "её мужа" }
+        },
+        {
+            instruction: "Completa la frase.",
+            text: "{{1}} зовут Семён, {{2}} зовут Лидия.",
+            words: ["мою соседа", "мою жену", "его жену", "моего соседа"],
+            correctAnswers: { 1: "моего соседа", 2: "его жену" }
+        },
+        {
+            instruction: "Completa la frase.",
+            text: "{{1}} зовут Антон, а как зовут {{2}}?",
+            words: ["нашу дочь", "наш сын", "вашу дочь", "нашего сына"],
+            correctAnswers: { 1: "нашего сына", 2: "вашу дочь" }
+        },
+        {
+            instruction: "Completa la frase.",
+            text: "{{1}} зовут Николай, а {{2}} зовут Катя.",
+            words: ["Их дядю", "его жена", "его жену", "их дядя"],
+            correctAnswers: { 1: "Их дядю", 2: "его жену" }
+        },
+        {
+            instruction: "Completa la frase.",
+            text: "{{1}} зовут Дима, а {{2}} зовут Анна.",
+            words: ["его девушку", "мою девушку", "моего друга"],
+            correctAnswers: { 1: "моего друга", 2: "его девушку" }
+        },
+        {
+            instruction: "Completa la frase.",
+            text: "{{1}} зовут Борис, а {{2}} зовут Ольга.",
+            words: ["мой парень", "его сестру", "моего парня", "мою сестру"],
+            correctAnswers: { 1: "моего парня", 2: "его сестру" }
+        },
+        {
+            instruction: "Completa la frase.",
+            text: "{{1}} зовут Виктория, а {{2}} зовут Барсик.",
+            words: ["его кота", "моего подругу", "мою подругу", "её кота"],
+            correctAnswers: { 1: "мою подругу", 2: "её кота" }
+        },
+        {
+            instruction: "Completa la frase.",
+            text: "{{1}} зовут Белка, а {{2}} зовут Мурка.",
+            words: ["нашего собаку", "нашу кошку", "нашу собаку", "нашего кота"],
+            correctAnswers: { 1: "нашу собаку", 2: "нашу кошку" }
+        }
+    ];
+
+    let currentExerciseIndex = 0;
+    let exerciseResults = [];
+    let checked = false;
+    let gapElements = [];
+    let wordElements = [];
+
+    function loadExercise(index) {
+        if (index >= exercises.length) {
+            showCompletion();
+            return;
+        }
+
+        checked = false;
+        const exercise = exercises[index];
+
+        exerciseContainer.innerHTML = `
+            <div class="header">
+                <div class="exercise-counter">Esercizio ${index + 1} di ${exercises.length}</div>
+            </div>
+            <div class="instruction">${exercise.instruction}</div>
+            <div class="exercise-text" id="ex-accusativo-trascina-01-text">${exercise.text}</div>
+            <div class="word-options" id="ex-accusativo-trascina-01-options"></div>
+            <div class="controls">
+                <button class="btn btn-primary" id="ex-accusativo-trascina-01-check">Verifica</button>
+                <button class="btn btn-secondary" id="ex-accusativo-trascina-01-next" style="display:none;">Prossimo</button>
+                <div class="feedback" id="ex-accusativo-trascina-01-feedback"></div>
+            </div>
+        `;
+
+        const exerciseText = exerciseContainer.querySelector('#ex-accusativo-trascina-01-text');
+        const wordOptionsContainer = exerciseContainer.querySelector('#ex-accusativo-trascina-01-options');
+        const checkBtn = exerciseContainer.querySelector('#ex-accusativo-trascina-01-check');
+        const nextBtn = exerciseContainer.querySelector('#ex-accusativo-trascina-01-next');
+        const feedback = exerciseContainer.querySelector('#ex-accusativo-trascina-01-feedback');
+
+        const placeholderPattern = /\{\{(\d+)\}\}/g;
+        let textContent = exercise.text;
+
+        textContent = textContent.replace(placeholderPattern, (match, number) => {
+            return `<span class="gap" data-gap="${number}"></span>`;
+        });
+
+        exerciseText.innerHTML = textContent;
+
+        gapElements = Array.from(exerciseText.querySelectorAll('.gap'));
+        wordElements = [];
+
+        exercise.words.forEach((word, idx) => {
+            const wordElement = document.createElement('div');
+            wordElement.className = 'word-option';
+            wordElement.textContent = word;
+            wordElement.dataset.word = word;
+            wordElement.dataset.index = idx;
+            wordElement.addEventListener('click', () => handleWordClick(wordElement));
+            wordOptionsContainer.appendChild(wordElement);
+            wordElements.push(wordElement);
+        });
+
+        gapElements.forEach(gap => {
+            gap.addEventListener('click', () => handleGapClick(gap));
+        });
+
+        checkBtn.addEventListener('click', () => checkAnswers(exercise, feedback, nextBtn, checkBtn));
+        nextBtn.addEventListener('click', () => {
+            currentExerciseIndex++;
+            loadExercise(currentExerciseIndex);
+        });
+    }
+
+    function handleWordClick(wordElement) {
+        if (wordElement.classList.contains('used') || checked) return;
+
+        const emptyGap = gapElements.find(gap => !gap.classList.contains('filled'));
+        if (!emptyGap) return;
+
+        const word = wordElement.dataset.word;
+        emptyGap.textContent = word;
+        emptyGap.classList.add('filled');
+        emptyGap.dataset.wordIndex = wordElement.dataset.index;
+        emptyGap.dataset.word = word;
+        wordElement.classList.add('used');
+    }
+
+    function handleGapClick(gap) {
+        if (checked) return;
+        if (!gap.classList.contains('filled')) return;
+
+        const wordIndex = gap.dataset.wordIndex;
+        const wordElement = wordElements.find(w => w.dataset.index === wordIndex);
+
+        gap.textContent = '';
+        gap.classList.remove('filled');
+        delete gap.dataset.wordIndex;
+        delete gap.dataset.word;
+
+        if (wordElement) {
+            wordElement.classList.remove('used');
+        }
+    }
+
+    function checkAnswers(exercise, feedback, nextBtn, checkBtn) {
+        checked = true;
+        let correct = 0;
+        let total = Object.keys(exercise.correctAnswers).length;
+
+        gapElements.forEach(gap => {
+            const gapNum = parseInt(gap.dataset.gap);
+            const userAnswer = gap.dataset.word;
+            const correctAnswer = exercise.correctAnswers[gapNum];
+
+            if (userAnswer === correctAnswer) {
+                gap.classList.remove('filled');
+                gap.classList.add('correct');
+                correct++;
+            } else {
+                gap.classList.add('incorrect');
+            }
+        });
+
+        exerciseResults.push({ correct, total });
+        feedback.textContent = `Corretto: ${correct} / ${total}`;
+        checkBtn.style.display = 'none';
+        nextBtn.style.display = 'inline-block';
+    }
+
+    function showCompletion() {
+        exerciseContainer.style.display = 'none';
+        completionScreen.style.display = 'block';
+
+        completionScreen.innerHTML = `
+            <div class="completion">
+                <h2>Complimenti!</h2>
+                <p>Hai completato tutti i ${exercises.length} esercizi.</p>
+            </div>
+        `;
+    }
+
+    loadExercise(currentExerciseIndex);
+})();
+</script>
+
         </section>
 
         <section class="exercise-group">
