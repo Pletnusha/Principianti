@@ -596,3 +596,6 @@ h1, h2, h3 {
 #ex-flashcards-acc-01 .fca01-card-container {
     max-width: 300px;
 }
+#ex-flashcards-acc-01 .fca01-card {
+    height: 250px;
+}
