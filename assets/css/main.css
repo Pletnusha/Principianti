@@ -599,3 +599,19 @@ h1, h2, h3 {
 #ex-flashcards-acc-01 .fca01-card {
     height: 200px;
 }
+/* Flashcards (mobile): fix overlap of the card over navigation */
+@media (max-width: 600px) {
+  #ex-flashcards-acc-01 .fca01-card-container {
+    margin-bottom: 1.25rem; /* space between card and nav */
+  }
+
+  #ex-flashcards-acc-01 .fca01-nav {
+    position: relative;
+    z-index: 3; /* keep buttons above card layer on iOS */
+  }
+
+  #ex-flashcards-acc-01 .fca01-card {
+    position: relative;
+    z-index: 1;
+  }
+}
