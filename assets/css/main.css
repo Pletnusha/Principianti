@@ -476,6 +476,14 @@ h1, h2, h3 {
   text-align: center;
 }
 
+.page-accusativo-come-ti-chiami #ex-accusativo-trascina-01 .instruction {
+  margin-bottom: 1.5rem;
+}
+
+.page-accusativo-come-ti-chiami #ex-accusativo-trascina-01 .exercise-text {
+  margin-bottom: 2rem;
+}
+
 .page-accusativo-come-ti-chiami #ex-accusativo-trascina-01 .word-options {
   display: flex;
   flex-wrap: wrap;
