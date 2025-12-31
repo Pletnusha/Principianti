@@ -939,3 +939,9 @@ h1, h2, h3 {
     min-height: 135px;
   }
 }
+@media (max-width: 600px) {
+  #ex-flashcards-acc-01 .fca01-card-container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
