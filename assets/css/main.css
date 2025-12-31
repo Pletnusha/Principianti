@@ -915,3 +915,27 @@ h1, h2, h3 {
     padding: 0 0.5rem;
   }
 }
+/* Button sizing fix - equalize border width */
+#ex-flashcards-acc-01 .btn.btn-primary,
+#ex-flashcards-acc-01 .btn.btn-secondary {
+  border: 1px solid transparent;
+}
+
+/* Card centering fix - prevent padding overflow */
+#ex-flashcards-acc-01 .fca01-card {
+  height: 135px;
+  min-height: 135px;
+  box-sizing: border-box;
+}
+
+#ex-flashcards-acc-01 .fca01-card-face {
+  box-sizing: border-box;
+}
+
+/* Mobile override - maintain 135px height */
+@media (max-width: 600px) {
+  #ex-flashcards-acc-01 .fca01-card {
+    height: 135px;
+    min-height: 135px;
+  }
+}
