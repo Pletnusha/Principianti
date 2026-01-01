@@ -975,8 +975,25 @@
             const counter = root.querySelector('#ex-flashcards-acc-04-counter');
 
             if (flashcardsData.length === 0) {
-                area.innerHTML = '<p class="fca01-empty">Нет карточек</p>';
                 counter.textContent = '0 / 0';
+                area.innerHTML = `
+                    <div class="fca01-card-container">
+                        <div class="fca01-card">
+                            <div class="fca01-card-face fca01-card-front">
+                                <button class="fca01-audio-btn" disabled>🔊</button>
+                                <p class="fca01-empty">Нет карточек</p>
+                            </div>
+                            <div class="fca01-card-face fca01-card-back">
+                                <button class="fca01-audio-btn" disabled>🔊</button>
+                                <p class="fca01-empty">Нет карточек</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                const card = area.querySelector('.fca01-card');
+                card.addEventListener('click', function() {
+                    this.classList.toggle('is-flipped');
+                });
                 return;
             }
 
