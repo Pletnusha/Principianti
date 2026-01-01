@@ -927,7 +927,15 @@
     }
 
     function initFlashcardsAcc04(root) {
-        const flashcardsData = [];
+        const flashcardsData = [
+            { front: "Мой отец Александр.", back: "Моего отца зовут Александр." },
+            { front: "Моя мама Анна.", back: "Мою маму зовут Анна." },
+            { front: "Твой брат Андрей.", back: "Твоего брата зовут Андрей." },
+            { front: "Наша подруга Наташа.", back: "Нашу подругу зовут Наташа." },
+            { front: "Её муж Анатолий.", back: "Её мужа зовут Анатолий." },
+            { front: "Ваш кот Барсик.", back: "Вашего кота зовут Барсик?" },
+            { front: "Твоя жена Светлана.", back: "Твою жену зовут Светлана?" }
+        ];
 
         let currentMode = 'study';
         let currentIndex = 0;
