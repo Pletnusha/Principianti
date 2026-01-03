@@ -1095,8 +1095,7 @@
 
                 const promptDiv = document.createElement('div');
                 promptDiv.className = 'quiz-prompt';
-                promptDiv.innerHTML = `<strong>${index + 1}.</strong> ${item.promptPrefix}<input type="text" class="quiz-input" data-index="${index}">${item.promptSuffix}`;
-
+               promptDiv.innerHTML = `${item.promptPrefix}<input type="text" class="quiz-input" data-index="${index}">${item.promptSuffix}`;
                 const controlsDiv = document.createElement('div');
                 controlsDiv.className = 'quiz-controls';
 
