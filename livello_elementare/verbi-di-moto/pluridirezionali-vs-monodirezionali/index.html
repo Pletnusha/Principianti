@@ -36,14 +36,218 @@
 
         <div class="exercise-panel" id="panel-acc-open-1" data-access="public" hidden>
             <section id="ex-dragdrop-plur-01">
-                <div id="ex-dragdrop-plur-01-container">
-                    <!-- TODO: Exercise content will be rendered here -->
+                <div id="ex-dragdrop-plur-01-container">     
                 </div>
                 <div id="ex-dragdrop-plur-01-completion" style="display:none;">
-                    <!-- TODO: Completion screen -->
                 </div>
             </section>
-            <!-- TODO: Add drag & drop JS logic -->
+           <script type="text/plain" data-lazy-script="panel-acc-open-1">
+(() => {
+    const root = document.getElementById('ex-dragdrop-plur-01');
+    const exerciseContainer = root.querySelector('#ex-dragdrop-plur-01-container');
+    const completionScreen = root.querySelector('#ex-dragdrop-plur-01-completion');
+
+    const exercises = [
+        {
+            instruction: "Completa la frase scegliendo 2 verbi adatti al contesto",
+            text: " Обычно мы {{1}} завтракать в бар рядом с домом, но сегодня мы {{2}} завтракать в центр.",
+            words: ["хотить", "ходим", "идёте", "идём"],
+            correctAnswers: { 1: "ходим", 2: "идём" }
+        },
+        {
+            instruction: "Completa la frase scegliendo 2 verbi adatti al contesto",
+            text: "Куда ты {{1}}? Я {{2}} на тренировку.",
+            words: ["ходишь", "идёшь", "хожу", "иду"],
+            correctAnswers: { 1: "идёшь", 2: "иду" }
+        },
+        {
+            instruction: "Completa la frase scegliendo 2  verbi adatti al contesto",
+            text: " Ты часто сюда {{1}}? Да, я {{2}} в этот ресторан каждую неделю.",
+            words: ["идёшь", "ходишь", "иду", "хожу"],
+            correctAnswers: { 1: "ходишь", 2: "хожу" }
+        },
+        {
+            instruction: "Completa la frase scegliendo 2 verbi adatti al contesto",
+            text: "Она {{1}} по берегу моря. Она часто {{2}} гулять по берегу моря.",
+            words: ["ходить", "идёт", "ходит", "идёшь"],
+            correctAnswers: { 1: "идёт", 2: "ходит" }
+        },
+        {
+            instruction: "Completa la frase scegliendo 2 verbi adatti al contesto",
+            text: "Вы {{1}}  на концерт сегодня вечером. Мы редко {{2}} на концерты.",
+            words: ["идём", "ходим", "идёте", "ходите"],
+            correctAnswers: { 1: "идёте", 2: "ходим" }
+        },
+        {
+            instruction: "Completa la frase scegliendo 2 espressionи",
+            text: "{{1}} зовут Николай, а {{2}} зовут Катя.",
+            words: ["Их дядю", "его жена", "его жену", "их дядя"],
+            correctAnswers: { 1: "Их дядю", 2: "его жену" }
+        },
+        {
+            instruction: "Completa la frase scegliendo 2 verbi adatti al contesto",
+            text: "Тебе нравиться {{1}} в кино? Если честно я очень редко {{2}} в кино.",
+            words: ["ходишь", "ходить", "идти","хожу"],
+            correctAnswers: { 1: "ходить", 2: "хожу" }
+        },
+        {
+            instruction: "Completa la frase scegliendo 2 verbi adarri al contesto",
+            text: " Ты каждый день {{1}} в спортзал? Нет, но три раза в неделю {{2}}.",
+            words: ["мой парень", "ходит", "идёт", "хожу", "иду"],
+            correctAnswers: { 1: "ходишь", 2: "хожу" }
+        },
+        {
+            instruction: "Completa la frase scegliendo 2 verbi adatti al contesto",
+            text: " Куда вы {{1}} в субботу вечером? Я {{2}} с подругами в кино, Андрей - смотреть футбол в бар.",
+            words: ["идёте", "ходите", "хожу", "иду"],
+            correctAnswers: { 1: "идёте", 2: "иду" }
+        },
+        {
+            instruction: "Completa la frase scegliendo 2 verbi adatti al contesto",
+            text: "Привет, какими судьбами? Ты редко {{1}} в этот бар. Привет, я {{2}} сюда часто, но обычно после обеда",
+            words: ["идёшь", "ходишь", "идёт", "хожу"],
+            correctAnswers: { 1: "ходишь", 2: "хожу" }
+        }
+    ];
+
+    let currentExerciseIndex = 0;
+    let checked = false;
+    let gapElements = [];
+    let wordElements = [];
+
+    function loadExercise(index) {
+        if (index >= exercises.length) {
+            showCompletion();
+            return;
+        }
+
+        checked = false;
+        const exercise = exercises[index];
+
+        exerciseContainer.innerHTML = `
+            <div class="header">
+                <div class="exercise-counter">Esercizio ${index + 1} di ${exercises.length}</div>
+            </div>
+            <div class="instruction">${exercise.instruction}</div>
+            <div class="exercise-text" id="ex-dragdrop-plur-01-text">${exercise.text}</div>
+            <div class="word-options" id="ex-dragdrop-plur-01-options"></div>
+            <div class="controls">
+                <button class="btn btn-primary" id="ex-dragdrop-plur-01-check">Verifica</button>
+                <button class="btn btn-secondary" id="ex-dragdrop-plur-01-next" style="display:none;">Prossimo</button>
+                <div class="feedback" id="ex-dragdrop-plur-01-feedback"></div>
+            </div>
+        `;
+
+        const exerciseText = exerciseContainer.querySelector('#ex-dragdrop-plur-01-text');
+        const wordOptionsContainer = exerciseContainer.querySelector('#ex-dragdrop-plur-01-options');
+        const checkBtn = exerciseContainer.querySelector('#ex-dragdrop-plur-01-check');
+        const nextBtn = exerciseContainer.querySelector('#ex-dragdrop-plur-01-next');
+        const feedback = exerciseContainer.querySelector('#ex-dragdrop-plur-01-feedback');
+
+        const placeholderPattern = /\{\{(\d+)\}\}/g;
+        let textContent = exercise.text;
+
+        textContent = textContent.replace(placeholderPattern, (match, number) => {
+            return `<span class="gap" data-gap="${number}"></span>`;
+        });
+
+        exerciseText.innerHTML = textContent;
+
+        gapElements = Array.from(exerciseText.querySelectorAll('.gap'));
+        wordElements = [];
+
+        exercise.words.forEach((word, idx) => {
+            const wordElement = document.createElement('div');
+            wordElement.className = 'word-option';
+            wordElement.textContent = word;
+            wordElement.dataset.word = word;
+            wordElement.dataset.index = idx;
+            wordElement.addEventListener('click', () => handleWordClick(wordElement));
+            wordOptionsContainer.appendChild(wordElement);
+            wordElements.push(wordElement);
+        });
+
+        gapElements.forEach(gap => {
+            gap.addEventListener('click', () => handleGapClick(gap));
+        });
+
+        checkBtn.addEventListener('click', () => checkAnswers(exercise, feedback, nextBtn, checkBtn));
+        nextBtn.addEventListener('click', () => {
+            currentExerciseIndex++;
+            loadExercise(currentExerciseIndex);
+        });
+    }
+
+    function handleWordClick(wordElement) {
+        if (wordElement.classList.contains('used') || checked) return;
+
+        const emptyGap = gapElements.find(gap => !gap.classList.contains('filled'));
+        if (!emptyGap) return;
+
+        const word = wordElement.dataset.word;
+        emptyGap.textContent = word;
+        emptyGap.classList.add('filled');
+        emptyGap.dataset.wordIndex = wordElement.dataset.index;
+        emptyGap.dataset.word = word;
+        wordElement.classList.add('used');
+    }
+
+    function handleGapClick(gap) {
+        if (checked) return;
+        if (!gap.classList.contains('filled')) return;
+
+        const wordIndex = gap.dataset.wordIndex;
+        const wordElement = wordElements.find(w => w.dataset.index === wordIndex);
+
+        gap.textContent = '';
+        gap.classList.remove('filled');
+        delete gap.dataset.wordIndex;
+        delete gap.dataset.word;
+
+        if (wordElement) {
+            wordElement.classList.remove('used');
+        }
+    }
+
+    function checkAnswers(exercise, feedback, nextBtn, checkBtn) {
+        checked = true;
+        let correct = 0;
+        let total = Object.keys(exercise.correctAnswers).length;
+
+        gapElements.forEach(gap => {
+            const gapNum = parseInt(gap.dataset.gap);
+            const userAnswer = gap.dataset.word;
+            const correctAnswer = exercise.correctAnswers[gapNum];
+
+            if (userAnswer === correctAnswer) {
+                gap.classList.remove('filled');
+                gap.classList.add('correct');
+                correct++;
+            } else {
+                gap.classList.add('incorrect');
+            }
+        });
+
+        feedback.textContent = `Corretto: ${correct} / ${total}`;
+        checkBtn.style.display = 'none';
+        nextBtn.style.display = 'inline-block';
+    }
+
+    function showCompletion() {
+        exerciseContainer.style.display = 'none';
+        completionScreen.style.display = 'block';
+
+        completionScreen.innerHTML = `
+            <div class="completion">
+                <h2>Complimenti!</h2>
+                <p>Hai completato tutti i ${exercises.length} esercizi.</p>
+            </div>
+        `;
+    }
+
+    loadExercise(currentExerciseIndex);
+})();
+            </script>
         </div>
 
         <!-- ============================================================ -->
