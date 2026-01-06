@@ -881,8 +881,8 @@ h1, h2, h3 {
     margin-right: auto;
   }
 }
-.quiz-check-btn.btn.btn-primary {
-  font-size: 0.75rem;
+.quiz-check-btn.btn.btn-primary{
+    font-size: 0.75rem;
   padding: 0.5rem 0.9rem;
   min-width: 90px;
   width: 90px;
@@ -892,6 +892,7 @@ h1, h2, h3 {
   align-items: center;
   justify-content: center;
   line-height: 1;
+}
 /* ===== Base ===== */
 body {
   font-family: 'Montserrat', sans-serif;
@@ -1996,98 +1997,159 @@ article.exercise-card[data-target="panel-acc-open-10"],
     border-color: #ef4444;
     color: #991b1b;
 }
-/* ========================================= */
-/* СТИЛИ ДЛЯ УПРАЖНЕНИЯ (КАК НА СКРИНШОТЕ)   */
-/* ========================================= */
+/* =========================================
+   СТИЛИ ДЛЯ УПРАЖНЕНИЙ (Drag & Drop)
+   Класс: .rus-drag-drop
+   ========================================= */
 
-/* 1. Белая карточка-контейнер */
-#ex-dragdrop-plur-01-container,
-.exercise-panel section div[id$="-container"] {
-    background-color: #ffffff;
-    border: 1px solid #e0e6ed; /* Светлая рамка */
-    border-radius: 12px;       /* Закругленные углы */
-    padding: 40px;             /* Простор внутри */
-    max-width: 800px;
-    margin: 20px auto;
-    text-align: center;        /* Всё по центру */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.02);
-    font-family: 'Montserrat', sans-serif;
-}
-
-/* 2. Текст упражнения */
-.exercise-text {
-    font-size: 1.3rem;
-    line-height: 2.5;          /* Большой межстрочный интервал, чтобы линии не наезжали */
+/* 1. Основной контейнер */
+.rus-drag-drop {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    max-width: 800px; 
+    margin: 20px auto; 
+    background: #fff;
+    border: 1px solid #e5e7eb; 
+    border-radius: 12px; 
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
     color: #333;
-    margin-bottom: 30px;
+    position: relative;
+    box-sizing: border-box;
 }
 
-/* 3. ПРОБЕЛЫ (Линии для вставки) */
-.gap {
-    display: inline-block;
-    min-width: 150px;          /* Длинная линия (как на скрине) */
-    height: 1.4rem;
-    border-bottom: 2px solid #333; /* Черная линия снизу */
-    margin: 0 8px;
-    vertical-align: bottom;    /* Выравнивание по низу текста */
-    text-align: center;
-    color: #2b5797;            /* Цвет вставленного слова (синий) */
-    font-weight: 600;
-    cursor: pointer;
+/* 2. Инструкция (Задание) */
+.rus-drag-drop .instruction { 
+    font-weight: 600; 
+    color: #374151; 
+    margin-bottom: 20px; 
+    font-size: 1.1rem; 
 }
 
-/* Когда слово вставлено - линия становится синей */
-.gap.filled {
-    border-bottom: 2px solid #2b5797;
-}
-.gap.correct { border-bottom-color: #28a745; color: #28a745; }
-.gap.incorrect { border-bottom-color: #dc3545; color: #dc3545; }
-
-
-/* 4. СЛОВА ДЛЯ ВЫБОРА (В одну строку) */
-.word-options {
-    display: flex;             /* Включает режим "в одну строку" */
-    flex-wrap: wrap;           /* Если экран маленький, перенесет на след. строку */
-    justify-content: center;   /* Выравнивает по центру */
-    gap: 30px;                 /* Расстояние между словами */
-    margin-bottom: 30px;
-    padding: 0;
+/* 3. Текст упражнения */
+.rus-drag-drop .exercise-text { 
+    font-size: 1.2rem; 
+    line-height: 1.8; 
+    margin-bottom: 30px; 
 }
 
-/* Стиль самого слова (просто текст) */
-.word-option {
-    background: transparent;   /* Прозрачный фон (нет кнопки) */
-    border: none;              /* Нет рамки */
-    padding: 5px;
-    font-size: 1.2rem;
-    color: #555;               /* Темно-серый цвет */
-    cursor: pointer;
-    transition: color 0.2s;
+/* 4. Счётчик (1 из 10) */
+.rus-drag-drop .exercise-counter { 
+    color: #9ca3af; 
+    font-size: 0.85rem; 
+    text-transform: uppercase; 
+    letter-spacing: 1px; 
+    margin-bottom: 10px; 
 }
 
-.word-option:hover {
-    color: #2b5797;            /* При наведении синеет */
+/* 5. Пропуски в тексте (Gaps) */
+.rus-drag-drop .gap {
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center;
+    min-width: 90px; 
+    height: 36px; 
+    border-bottom: 2px solid #3b82f6; /* Синяя линия */
+    color: #3b82f6;
+    font-weight: bold; 
+    cursor: pointer; 
+    margin: 0 5px; 
+    padding: 0 10px;
+    transition: all 0.2s; 
+    vertical-align: middle;
 }
 
-/* Если слово использовали */
-.word-option.used {
-    color: #ccc;               /* Становится бледным */
-    text-decoration: line-through; /* Зачеркиваем (по желанию) */
-    pointer-events: none;
+/* Состояния пропусков */
+.rus-drag-drop .gap.filled { 
+    background-color: #eff6ff; 
+    border-radius: 6px; 
+    border-bottom: 2px solid transparent; 
+    color: #1d4ed8; 
 }
 
-
-/* 5. Кнопка проверки */
-.controls button.btn-primary {
-    background-color: #3366cc; /* Синий цвет кнопки */
-    color: white;
-    border: none;
-    padding: 12px 40px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    border-radius: 6px;
-    cursor: pointer;
+.rus-drag-drop .gap.correct { 
+    background-color: #dcfce7; 
+    color: #15803d; 
+    border: 1px solid #86efac; 
 }
-.controls button.btn-primary:hover {
-    background-color: #254db3;
+
+.rus-drag-drop .gap.incorrect { 
+    background-color: #fee2e2; 
+    color: #b91c1c; 
+    border: 1px solid #fca5a5; 
+}
+
+/* 6. Блок с вариантами слов */
+.rus-drag-drop .word-options {
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 10px; 
+    padding: 20px;
+    background-color: #f9fafb; 
+    border-radius: 8px; 
+    border: 1px dashed #d1d5db; 
+    margin-bottom: 25px;
+}
+
+/* Отдельные слова-кнопки */
+.rus-drag-drop .word-option {
+    background: #fff; 
+    border: 1px solid #d1d5db; 
+    padding: 8px 16px; 
+    border-radius: 20px;
+    cursor: pointer; 
+    transition: transform 0.1s, border-color 0.2s; 
+    user-select: none;
+}
+
+.rus-drag-drop .word-option:hover { 
+    border-color: #3b82f6; 
+    transform: translateY(-2px); 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); 
+}
+
+.rus-drag-drop .word-option.used { 
+    opacity: 0.5; 
+    background-color: #e5e7eb; 
+    pointer-events: none; 
+    transform: none; 
+}
+
+/* 7. Панель кнопок (Внизу) */
+.rus-drag-drop .controls { 
+    display: flex; 
+    align-items: center; 
+    gap: 15px; 
+    border-top: 1px solid #f3f4f6; 
+    padding-top: 20px; 
+}
+
+/* Кнопки (Проверить / Далее) */
+.rus-drag-drop .btn { 
+    padding: 10px 24px; 
+    border: none; 
+    border-radius: 6px; 
+    cursor: pointer; 
+    font-weight: 600; 
+    font-size: 1rem; 
+    transition: background-color 0.2s; 
+}
+
+.rus-drag-drop .btn-primary { 
+    background-color: #3b82f6; 
+    color: white; 
+}
+
+.rus-drag-drop .btn-primary:hover { 
+    background-color: #2563eb; 
+}
+
+.rus-drag-drop .btn-secondary { 
+    background-color: #6b7280; 
+    color: white; 
+}
+
+/* Текст результата (Справа) */
+.rus-drag-drop .feedback { 
+    font-weight: bold; 
+    margin-left: auto; 
 }
