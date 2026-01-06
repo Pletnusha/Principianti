@@ -33,104 +33,208 @@
             <span class="exercise-type">Drag &amp; Drop</span>
             <h3 class="exercise-title">Куда ты идёшь? Мы обычно ходим...</h3>
         </article>
-
-        <div class="universal-dd" id="ex-dragdrop-plur-01" style="max-width: 800px; margin: 0 auto;">
-    
-    <div id="ex-dragdrop-plur-01-container">
-        </div>
-
-    <div id="ex-dragdrop-plur-01-completion" style="display: none; text-align: center; padding: 2rem;">
-        </div>
-
-</div>
-
-<style>
-    /* Дополнительные стили для совместимости с твоим скриптом */
-    #ex-dragdrop-plur-01 .exercise-counter {
-        font-size: 0.9rem; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem;
-    }
-    #ex-dragdrop-plur-01 .feedback {
-        margin-top: 15px; font-weight: bold; min-height: 24px;
-    }
-    /* Цвета для кнопок, которые использует твой скрипт */
-    #ex-dragdrop-plur-01 .btn-primary { background-color: #2a5bd7; color: #fff; }
-    #ex-dragdrop-plur-01 .btn-secondary { background-color: #666; color: #fff; }
-</style>
-
-<script>
-<div id="ex-dragdrop-plur-01">
-    <div id="ex-dragdrop-plur-01-container"></div>
+<div id="ex-dragdrop-plur-01" class="universal-dd">
+    <div id="ex-dragdrop-plur-01-container">Загрузка...</div>
     <div id="ex-dragdrop-plur-01-completion" style="display: none;"></div>
 </div>
 
+<style>
+    /* Используем ID для стилизации */
+    #ex-dragdrop-plur-01 {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        max-width: 800px;
+        margin: 20px auto;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        color: #333;
+    }
+    
+    #ex-dragdrop-plur-01 .instruction {
+        font-weight: 600;
+        color: #374151;
+        margin-bottom: 20px;
+        font-size: 1.1rem;
+    }
+
+    #ex-dragdrop-plur-01 .exercise-text {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        margin-bottom: 30px;
+    }
+
+    /* Пропуски */
+    #ex-dragdrop-plur-01 .gap {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 90px;
+        height: 36px;
+        border-bottom: 2px solid #3b82f6;
+        color: #3b82f6;
+        font-weight: bold;
+        cursor: pointer;
+        margin: 0 5px;
+        padding: 0 10px;
+        transition: all 0.2s;
+        vertical-align: middle;
+    }
+
+    #ex-dragdrop-plur-01 .gap.filled {
+        background-color: #eff6ff;
+        border-radius: 6px;
+        border-bottom: 2px solid transparent;
+        color: #1d4ed8;
+    }
+
+    #ex-dragdrop-plur-01 .gap.correct {
+        background-color: #dcfce7;
+        color: #15803d;
+        border: 1px solid #86efac;
+    }
+
+    #ex-dragdrop-plur-01 .gap.incorrect {
+        background-color: #fee2e2;
+        color: #b91c1c;
+        border: 1px solid #fca5a5;
+    }
+
+    /* Блок слов */
+    #ex-dragdrop-plur-01 .word-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 20px;
+        background-color: #f9fafb;
+        border-radius: 8px;
+        border: 1px dashed #d1d5db;
+        margin-bottom: 25px;
+    }
+
+    #ex-dragdrop-plur-01 .word-option {
+        background: #fff;
+        border: 1px solid #d1d5db;
+        padding: 8px 16px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: transform 0.1s, border-color 0.2s;
+        user-select: none;
+    }
+
+    #ex-dragdrop-plur-01 .word-option:hover {
+        border-color: #3b82f6;
+        transform: translateY(-2px);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    #ex-dragdrop-plur-01 .word-option.used {
+        opacity: 0.5;
+        background-color: #e5e7eb;
+        pointer-events: none;
+        transform: none;
+    }
+
+    /* Кнопки */
+    #ex-dragdrop-plur-01 .controls {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        border-top: 1px solid #f3f4f6;
+        padding-top: 20px;
+    }
+
+    #ex-dragdrop-plur-01 .btn {
+        padding: 10px 24px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: background-color 0.2s;
+    }
+
+    #ex-dragdrop-plur-01 .btn-primary { background-color: #3b82f6; color: white; }
+    #ex-dragdrop-plur-01 .btn-primary:hover { background-color: #2563eb; }
+    #ex-dragdrop-plur-01 .btn-secondary { background-color: #6b7280; color: white; }
+    
+    #ex-dragdrop-plur-01 .feedback { font-weight: bold; margin-left: auto; }
+    #ex-dragdrop-plur-01 .exercise-counter { color: #9ca3af; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+</style>
+
+<script>
 (() => {
-    // Настройки
+    // === НАСТРОЙКА НАЗВАНИЯ ===
+    // Если захотите поменять название, поменяйте его ТОЛЬКО ЗДЕСЬ
+    // и скрипт сам обновит всё остальное (не забудьте поменять id в HTML выше)
     const rootID = 'ex-dragdrop-plur-01';
     
-    // Получаем элементы
     const root = document.getElementById(rootID);
+    if (!root) return;
+
     const exerciseContainer = root.querySelector(`#${rootID}-container`);
     const completionScreen = root.querySelector(`#${rootID}-completion`);
 
-    // ВАШИ ДАННЫЕ ИЗ КОДА 1 (Глаголы движения)
+    // --- ДАННЫЕ УПРАЖНЕНИЙ ---
     const exercises = [
         {
-            instruction: "Completa la frase scegliendo 2 verbi adatti al contesto",
-            text: " Обычно мы {{1}} завтракать в бар рядом с домом, но сегодня мы {{2}} завтракать в центр.",
-            words: ["хотить", "ходим", "идёте", "идём"],
+            instruction: "Completa la frase con i verbi corretti (Ходить vs Идти)",
+            text: "Обычно мы {{1}} завтракать в бар рядом с домом, но сегодня мы {{2}} завтракать в центр.",
+            words: ["идем", "ходим", "идёте", "идём"],
             correctAnswers: { 1: "ходим", 2: "идём" }
         },
         {
-            instruction: "Completa la frase scegliendo 2 verbi adatti al contesto",
-            text: "Куда ты {{1}}? Я {{2}} на тренировку.",
+            instruction: "Completa la frase con i verbi corretti",
+            text: "Куда ты сейчас {{1}}? Я {{2}} на тренировку.",
             words: ["ходишь", "идёшь", "хожу", "иду"],
             correctAnswers: { 1: "идёшь", 2: "иду" }
         },
         {
-            instruction: "Completa la frase scegliendo 2  verbi adatti al contesto",
-            text: " Ты часто сюда {{1}}? Да, я {{2}} в этот ресторан каждую неделю.",
+            instruction: "Completa la frase con i verbi corretti",
+            text: "Ты часто сюда {{1}}? Да, я {{2}} в этот ресторан каждую неделю.",
             words: ["идёшь", "ходишь", "иду", "хожу"],
             correctAnswers: { 1: "ходишь", 2: "хожу" }
         },
         {
-            instruction: "Completa la frase scegliendo 2 verbi adatti al contesto",
-            text: "Она {{1}} по берегу моря. Она часто {{2}} гулять по берегу моря.",
+            instruction: "Completa la frase con i verbi corretti",
+            text: "Смотри, она {{1}} по берегу моря. Она часто {{2}} гулять здесь.",
             words: ["ходить", "идёт", "ходит", "идёшь"],
             correctAnswers: { 1: "идёт", 2: "ходит" }
         },
         {
-            instruction: "Completa la frase scegliendo 2 verbi adatti al contesto",
-            text: "Вы {{1}}  на концерт сегодня вечером. Мы редко {{2}} на концерты.",
+            instruction: "Completa la frase con i verbi corretti",
+            text: "Вы {{1}} на концерт сегодня вечером? Мы редко {{2}} на концерты.",
             words: ["идём", "ходим", "идёте", "ходите"],
             correctAnswers: { 1: "идёте", 2: "ходим" }
         },
         {
-            instruction: "Completa la frase scegliendo 2 espressionи",
+            instruction: "Completa la frase con i verbi corretti",
             text: "{{1}} зовут Николай, а {{2}} зовут Катя.",
             words: ["Их дядю", "его жена", "его жену", "их дядя"],
             correctAnswers: { 1: "Их дядю", 2: "его жену" }
         },
         {
-            instruction: "Completa la frase scegliendo 2 verbi adatti al contesto",
-            text: "Тебе нравиться {{1}} в кино? Если честно я очень редко {{2}} в кино.",
-            words: ["ходишь", "ходить", "идти","хожу"],
+            instruction: "Completa la frase con i verbi corretti",
+            text: "Тебе нравится {{1}} в кино? Если честно, я очень редко {{2}} в кино.",
+            words: ["ходишь", "ходить", "идти", "хожу"],
             correctAnswers: { 1: "ходить", 2: "хожу" }
         },
         {
-            instruction: "Completa la frase scegliendo 2 verbi adarri al contesto",
-            text: " Ты каждый день {{1}} в спортзал? Нет, но три раза в неделю {{2}}.",
+            instruction: "Completa la frase con i verbi corretti",
+            text: "Ты каждый день {{1}} в спортзал? Нет, но три раза в неделю {{2}}.",
             words: ["мой парень", "ходит", "идёт", "хожу", "иду"],
             correctAnswers: { 1: "ходишь", 2: "хожу" }
         },
         {
-            instruction: "Completa la frase scegliendo 2 verbi adatti al contesto",
-            text: " Куда вы {{1}} в субботу вечером? Я {{2}} с подругами в кино, Андрей - смотреть футбол в бар.",
+            instruction: "Completa la frase con i verbi corretti",
+            text: "Куда вы {{1}} в субботу вечером? Я {{2}} с подругами в кино.",
             words: ["идёте", "ходите", "хожу", "иду"],
             correctAnswers: { 1: "идёте", 2: "иду" }
         },
         {
-            instruction: "Completa la frase scegliendo 2 verbi adatti al contesto",
-            text: "Привет, какими судьбами? Ты редко {{1}} в этот бар. Привет, я {{2}} сюда часто, но обычно после обеда",
+            instruction: "Completa la frase con i verbi corretti",
+            text: "Привет! Ты редко {{1}} в этот бар. — Привет, я {{2}} сюда часто, но обычно после обеда.",
             words: ["идёшь", "ходишь", "идёт", "хожу"],
             correctAnswers: { 1: "ходишь", 2: "хожу" }
         }
@@ -150,7 +254,6 @@
         checked = false;
         const exercise = exercises[index];
 
-        // Генерируем HTML без лишних стилей, используя классы "хорошего" дизайна
         exerciseContainer.innerHTML = `
             <div class="header">
                 <div class="exercise-counter">Esercizio ${index + 1} di ${exercises.length}</div>
@@ -159,9 +262,11 @@
             <div class="exercise-text" id="${rootID}-text">${exercise.text}</div>
             <div class="word-options" id="${rootID}-options"></div>
             <div class="controls">
-                <button class="btn btn-primary" id="${rootID}-check">Verifica</button>
-                <button class="btn btn-secondary" id="${rootID}-next" style="display:none;">Prossimo</button>
                 <div class="feedback" id="${rootID}-feedback"></div>
+                <div>
+                    <button class="btn btn-primary" id="${rootID}-check">Verifica</button>
+                    <button class="btn btn-secondary" id="${rootID}-next" style="display:none;">Prossimo</button>
+                </div>
             </div>
         `;
 
@@ -255,13 +360,12 @@
             }
         });
 
-        feedback.textContent = `Corretto: ${correct} / ${total}`;
-        
         if(correct === total) {
-             feedback.classList.add('success'); // Используем класс для цвета
-             feedback.textContent += " (Bravissimo!)";
+             feedback.style.color = "#15803d";
+             feedback.textContent = `Bravissimo! ${correct}/${total}`;
         } else {
-             feedback.classList.add('error');
+             feedback.style.color = "#b91c1c";
+             feedback.textContent = `Risultato: ${correct}/${total}`;
         }
 
         checkBtn.style.display = 'none';
@@ -272,13 +376,10 @@
         exerciseContainer.style.display = 'none';
         completionScreen.style.display = 'block';
 
-        // Убираем жесткие стили (style="...") и оставляем чистые теги
         completionScreen.innerHTML = `
-            <div class="completion">
-                <h2>Complimenti!</h2>
-                <p>Hai completato tutti i ${exercises.length} esercizi.</p>
-                <button class="btn btn-primary" onclick="location.reload()" style="margin-top: 2rem;">Ricomincia</button>
-            </div>
+            <h2 style="color: #3b82f6; margin-bottom: 20px;">Complimenti!</h2>
+            <p style="font-size: 1.2rem; color: #4b5563;">Hai completato tutti i ${exercises.length} esercizi.</p>
+            <button class="btn btn-primary" onclick="location.reload()" style="margin-top: 30px;">Ricomincia</button>
         `;
     }
 
