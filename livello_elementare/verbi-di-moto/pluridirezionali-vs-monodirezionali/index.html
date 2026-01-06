@@ -58,11 +58,21 @@
 </style>
 
 <script>
-(() => {
-    const root = document.getElementById('ex-dragdrop-plur-01');
-    const exerciseContainer = root.querySelector('#ex-dragdrop-plur-01-container');
-    const completionScreen = root.querySelector('#ex-dragdrop-plur-01-completion');
+<div id="ex-dragdrop-plur-01">
+    <div id="ex-dragdrop-plur-01-container"></div>
+    <div id="ex-dragdrop-plur-01-completion" style="display: none;"></div>
+</div>
 
+(() => {
+    // Настройки
+    const rootID = 'ex-dragdrop-plur-01';
+    
+    // Получаем элементы
+    const root = document.getElementById(rootID);
+    const exerciseContainer = root.querySelector(`#${rootID}-container`);
+    const completionScreen = root.querySelector(`#${rootID}-completion`);
+
+    // ВАШИ ДАННЫЕ ИЗ КОДА 1 (Глаголы движения)
     const exercises = [
         {
             instruction: "Completa la frase scegliendo 2 verbi adatti al contesto",
@@ -140,25 +150,26 @@
         checked = false;
         const exercise = exercises[index];
 
+        // Генерируем HTML без лишних стилей, используя классы "хорошего" дизайна
         exerciseContainer.innerHTML = `
             <div class="header">
                 <div class="exercise-counter">Esercizio ${index + 1} di ${exercises.length}</div>
             </div>
             <div class="instruction">${exercise.instruction}</div>
-            <div class="exercise-text" id="ex-dragdrop-plur-01-text">${exercise.text}</div>
-            <div class="word-options" id="ex-dragdrop-plur-01-options"></div>
+            <div class="exercise-text" id="${rootID}-text">${exercise.text}</div>
+            <div class="word-options" id="${rootID}-options"></div>
             <div class="controls">
-                <button class="btn btn-primary" id="ex-dragdrop-plur-01-check">Verifica</button>
-                <button class="btn btn-secondary" id="ex-dragdrop-plur-01-next" style="display:none;">Prossimo</button>
-                <div class="feedback" id="ex-dragdrop-plur-01-feedback"></div>
+                <button class="btn btn-primary" id="${rootID}-check">Verifica</button>
+                <button class="btn btn-secondary" id="${rootID}-next" style="display:none;">Prossimo</button>
+                <div class="feedback" id="${rootID}-feedback"></div>
             </div>
         `;
 
-        const exerciseText = exerciseContainer.querySelector('#ex-dragdrop-plur-01-text');
-        const wordOptionsContainer = exerciseContainer.querySelector('#ex-dragdrop-plur-01-options');
-        const checkBtn = exerciseContainer.querySelector('#ex-dragdrop-plur-01-check');
-        const nextBtn = exerciseContainer.querySelector('#ex-dragdrop-plur-01-next');
-        const feedback = exerciseContainer.querySelector('#ex-dragdrop-plur-01-feedback');
+        const exerciseText = exerciseContainer.querySelector(`#${rootID}-text`);
+        const wordOptionsContainer = exerciseContainer.querySelector(`#${rootID}-options`);
+        const checkBtn = exerciseContainer.querySelector(`#${rootID}-check`);
+        const nextBtn = exerciseContainer.querySelector(`#${rootID}-next`);
+        const feedback = exerciseContainer.querySelector(`#${rootID}-feedback`);
 
         const placeholderPattern = /\{\{(\d+)\}\}/g;
         let textContent = exercise.text;
@@ -246,12 +257,11 @@
 
         feedback.textContent = `Corretto: ${correct} / ${total}`;
         
-        // Меняем цвет текста обратной связи
         if(correct === total) {
-             feedback.style.color = "#22c55e"; // Зеленый
+             feedback.classList.add('success'); // Используем класс для цвета
              feedback.textContent += " (Bravissimo!)";
         } else {
-             feedback.style.color = "#ef4444"; // Красный
+             feedback.classList.add('error');
         }
 
         checkBtn.style.display = 'none';
@@ -262,10 +272,11 @@
         exerciseContainer.style.display = 'none';
         completionScreen.style.display = 'block';
 
+        // Убираем жесткие стили (style="...") и оставляем чистые теги
         completionScreen.innerHTML = `
             <div class="completion">
-                <h2 style="font-family: 'League Spartan'; font-size: 2rem; color: #2a5bd7;">Complimenti!</h2>
-                <p style="font-size: 1.2rem; margin-top: 1rem;">Hai completato tutti i ${exercises.length} esercizi.</p>
+                <h2>Complimenti!</h2>
+                <p>Hai completato tutti i ${exercises.length} esercizi.</p>
                 <button class="btn btn-primary" onclick="location.reload()" style="margin-top: 2rem;">Ricomincia</button>
             </div>
         `;
