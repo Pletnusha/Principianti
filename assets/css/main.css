@@ -525,6 +525,7 @@ h1, h2, h3 {
   transition: background 0.2s ease, transform 0.1s ease;
   box-sizing: border-box;
   text-align: center;
+  line-height: 1;
 }
 
 :is([id^="ex-flashcards-acc-"], [id^="ex-flashcards-plur-"]) .btn.btn-primary:hover,
@@ -556,6 +557,7 @@ h1, h2, h3 {
   transition: all 0.2s;
   box-sizing: border-box;
   text-align: center;
+  line-height: 1;
 }
 
 :is([id^="ex-flashcards-acc-"], [id^="ex-flashcards-plur-"]) .fca01-btn-nav:hover {
@@ -1422,6 +1424,7 @@ h1, h2, h3 {
   transition: background 0.2s ease, transform 0.1s ease;
   box-sizing: border-box;
   text-align: center;
+  line-height: 1;
 }
 
 :is([id^="ex-flashcards-acc-"], [id^="ex-flashcards-plur-"]) .btn.btn-primary:hover,
@@ -1453,6 +1456,7 @@ h1, h2, h3 {
   transition: all 0.2s;
   box-sizing: border-box;
   text-align: center;
+  line-height: 1;
 }
 
 :is([id^="ex-flashcards-acc-"], [id^="ex-flashcards-plur-"]) .fca01-btn-nav:hover {
