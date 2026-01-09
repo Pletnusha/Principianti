@@ -1441,7 +1441,7 @@
             currentMode = mode;
             root.querySelectorAll('.fca01-mode-btn').forEach(btn => btn.classList.remove('active'));
             root.querySelectorAll('.fca01-section').forEach(sec => sec.classList.remove('visible'));
-            root.querySelector(`#ex-flashcards-acc-02-section-${mode}`).classList.add('visible');
+            root.querySelector(`<div id="ex-flashcards-acc-08"></div>-section-${mode}`).classList.add('visible');
             root.querySelector(`[data-mode="${mode}"]`).classList.add('active');
 
             if (mode === 'study') { currentIndex = 0; renderCard(); }
@@ -1450,8 +1450,8 @@
         }
 
         function renderCard() {
-            const area = root.querySelector('#ex-flashcards-acc-02-learning-area-study');
-            const counter = root.querySelector('#ex-flashcards-acc-02-counter');
+            const area = root.querySelector('<div id="ex-flashcards-acc-08"></div>-learning-area-study');
+            const counter = root.querySelector('<div id="ex-flashcards-acc-08"></div>-counter');
             const cardData = flashcardsData[currentIndex];
 
             counter.textContent = `${currentIndex + 1} / ${flashcardsData.length}`;
