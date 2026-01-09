@@ -1445,7 +1445,7 @@
             root.querySelector(`[data-mode="${mode}"]`).classList.add('active');
 
             if (mode === 'study') { currentIndex = 0; renderCard(); }
-            else if (mode === 'quiz') { renderQuiz(); root.querySelector('#ex-flashcards-acc-02-start-quiz-btn').classList.add('hidden'); }
+            else if (mode === 'quiz') { renderQuiz(); root.querySelector('<div id="ex-flashcards-acc-08"></div>-start-quiz-btn').classList.add('hidden'); }
             else if (mode === 'match') { initMatchGame(); }
         }
 
